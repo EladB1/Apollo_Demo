@@ -13,7 +13,9 @@ const App = () => {
         <div>
             <Nav/>
             <Routes>
-                <Route path="/" element={<Author />}/>
+                <Route path="/" element={
+                    <Author authorID="author-1" />
+                }/>
                 <Route path="/book" element={<Book />}/>
             </Routes>
         </div>

@@ -10,7 +10,9 @@ const Book = () => {
                 <p><span className="fw-bold">BookID:</span> book-1</p>
                 <p><span className="fw-bold">Name:</span> Crime and Punishment</p>
                 <p><span className="fw-bold">pageCount:</span> 300</p>
-                <div className="p-2"><Author /></div>
+                <div className="p-2">
+                    <Author authorID="author-1" firstname="Fyodor" lastname="Dostoevsky" />
+                </div>
             </div>
         </div>
     );
