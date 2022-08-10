@@ -6,7 +6,8 @@ const Nav = () => {
             <div className="row">
                 <nav className="navbar ps-5 pe-5">
                     <Link to="/" className="navbar-brand">Logo</Link>
-                    <Link to="/" className="nav-link">Home</Link>
+                    <Link to="/search/author" className="nav-link">Search Author</Link>
+                    <Link to="/search/book" className="nav-link">Search Book</Link>
                     <Link to="/book" className="nav-link">Book</Link>
                 </nav>
             </div>
