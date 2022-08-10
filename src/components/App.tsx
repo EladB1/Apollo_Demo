@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import Nav from './Nav';
 import Author from './Author';
+import FindAuthor from './FindAuthor';
 import Book from './Book';
 
 
@@ -14,7 +15,8 @@ const App = () => {
             <Nav/>
             <Routes>
                 <Route path="/" element={
-                    <Author authorID="author-1" />
+                    /*<Author authorID="author-1" />*/
+                    <FindAuthor />
                 }/>
                 <Route path="/book" element={<Book />}/>
             </Routes>
