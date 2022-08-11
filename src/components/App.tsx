@@ -16,6 +16,9 @@ const App = () => {
                 <Route path="/" element={<ListAll />} />
                 <Route path="/search/author" element={<Find type="Author"/>}/>
                 <Route path="/search/book" element={<Find type="Book"/>}/>
+                <Route path="/create" element={<></>} />
+                <Route path="/update" element={<></>} />
+                <Route path="/delete" element={<></>} />
             </Routes>
         </div>
     );

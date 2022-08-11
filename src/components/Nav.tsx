@@ -9,6 +9,9 @@ const Nav = () => {
                     <Link to="/" className="nav-link">Home</Link>
                     <Link to="/search/author" className="nav-link">Search Author</Link>
                     <Link to="/search/book" className="nav-link">Search Book</Link>
+                    <Link to="/create" className="nav-link">Create</Link>
+                    <Link to="/update" className="nav-link">Update</Link>
+                    <Link to="/delete" className="nav-link">Delete</Link>
                 </nav>
             </div>
         </div>
