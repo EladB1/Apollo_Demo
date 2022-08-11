@@ -37,7 +37,6 @@ const CreateForm = () => {
     const formSubmit = (event: any) => {
         event.preventDefault();
         let vars;
-        //console.log(event.target.elements);
         if (selected === 'Book') {
             const {bookID, name, pages, authorID} = event.target.elements;
             vars = {
