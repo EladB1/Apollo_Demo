@@ -1,6 +1,8 @@
 import { useLazyQuery, gql, DocumentNode } from '@apollo/client';
 import { useState } from 'react';
 
+import Author from './Author';
+import Book from './Book';
 
 const getAllAuthors = gql`
     query {
@@ -59,19 +61,40 @@ const ListAll = () => {
             {selected === 'Books' && <div className="row mt-5 text-wrap word-break">
                 {bookLoading && <p>Loading...</p>}
                 {bookError && <p>{bookError.toString()}</p>}
-                {
-                    
-                    bookData && 
-                    <pre>{JSON.stringify(bookData)}</pre>
+                {bookData && 
+                    <div>{
+                        bookData.allBooks.map((data: any) => {
+                            return <div className="mb-1">
+                                <Book 
+                                    key={data.id}
+                                    bookID={data.id}
+                                    name={data.name}
+                                    pageCount={data.pageCount} 
+                                    authorID={data.author.id} 
+                                    authorFirstName={data.author.firstName} 
+                                    authorLastName={data.author.lastName}
+                                />
+                            </div>
+                        })
+                    }</div>
                 }
             </div>}
             {selected === 'Authors' && <div className="row mt-5 text-wrap word-break">
                 {authorLoading && <p>Loading...</p>}
                 {authorError && <p>{authorError.toString()}</p>}
-                {
-                    
-                    authorData && 
-                    <pre>{JSON.stringify(authorData)}</pre>
+                {authorData && 
+                    <div>{ 
+                        authorData.allAuthors.map((data: any) => {
+                            return <div className="mb-1">
+                                <Author 
+                                key={data.id} 
+                                authorID={data.id} 
+                                firstname={data.firstName} 
+                                lastname={data.lastName} 
+                                />
+                            </div>;
+                        })
+                    }</div>
                 }
             </div>}
         </div>
