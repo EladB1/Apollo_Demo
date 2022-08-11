@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.minimizer:hover {
+  color: #fd2293;
+  font-size: 2em;
+}

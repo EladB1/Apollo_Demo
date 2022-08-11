@@ -1,19 +1,27 @@
-import Author from './Author';
+import { useState } from 'react';
 
+import Author from './Author';
 import { BookProps } from '../interfaces/BookProps';
 
 const Book = (props: BookProps) => {
+    const [visible, setVisible] = useState(true);
+
     return (
-        <div className="container">
-            <div className="row border">
-                <h1>Book</h1>
+        <div className="container mb-2">
+            <div className="row border d-flex justify-content-between">
+                <h1 className="w-25">Book</h1>
+                <div 
+                    className="fw-bold fs-1 w-25 text-end minimizer"
+                    onClick={() => setVisible(!visible)}
+                >-</div>
             </div>
-            <div className="row border bg-light">
+            <div className={`row border bg-light ${visible ? 'visible' : 'collapse'}`}>
                 <p><span className="fw-bold">BookID:</span> {props.bookID}</p>
                 <p><span className="fw-bold">Name:</span> {props.name}</p>
                 <p><span className="fw-bold">pageCount:</span> {props.pageCount}</p>
                 <div className="p-2">
-                    <Author 
+                    <Author
+                        key={`${props.authorID}.${props.bookID}`}
                         authorID={props.authorID}
                         firstname={props.authorFirstName}
                         lastname={props.authorLastName}
