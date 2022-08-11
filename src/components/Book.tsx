@@ -11,8 +11,8 @@ const Book = (props: BookProps) => {
         <div className="container mb-2">
             <div className="row border d-flex justify-content-between">
                 <h1 className="w-25">Book</h1>
-                <Link className="w-25 p-3 nav-link" to={`update/book/${props.bookID}`}>Update</Link>
-                <Link className="w-25 p-3 nav-link" to={`delete/book/${props.bookID}`}>Delete</Link>
+                <Link className="w-25 p-3 nav-link" to={`/update/book/${props.bookID}`}>Update</Link>
+                <Link className="w-25 p-3 nav-link" to={`/delete/book/${props.bookID}`}>Delete</Link>
                 <div 
                     className="fw-bold fs-1 w-25 text-end minimizer"
                     onClick={() => setVisible(!visible)}

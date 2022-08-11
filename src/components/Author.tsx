@@ -10,8 +10,8 @@ const Author = (props: AuthorProps) => {
         <div className="container">
             <div className="row border mt-1 bg-secondary justify-content-between">
                 <h1 className="w-25">Author</h1>
-                <Link className="w-25 p-3 nav-link" to={`update/author/${props.authorID}`}>Update</Link>
-                <Link className="w-25 p-3 nav-link" to={`delete/author/${props.authorID}`}>Delete</Link>
+                <Link className="w-25 p-3 nav-link" to={`/update/author/${props.authorID}`}>Update</Link>
+                <Link className="w-25 p-3 nav-link" to={`/delete/author/${props.authorID}`}>Delete</Link>
                 <div 
                     className="fw-bold fs-1 w-25 text-end minimizer"
                     onClick={() => setVisible(!visible)}
