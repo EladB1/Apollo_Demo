@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Author from './Author';
 import Book from './Book';
+import ErrorPage from './ErrorPage';
 
 const createBook = gql`
     mutation CreateBook($id: ID!, $name: String!, $pageCount: Int!, $authorID: ID!) {
@@ -82,19 +83,19 @@ const CreateForm = () => {
                             <div>
                                 <div className="form-group">
                                     <label htmlFor="bookID">Book ID:</label>
-                                    <input className="form-control" type="text" name="bookID" /> 
+                                    <input className="form-control" type="text" name="bookID" required/> 
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="name">Name:</label>
-                                    <input className="form-control" type="text" name="name" /> 
+                                    <input className="form-control" type="text" name="name" required/> 
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="pages">Page Count:</label>
-                                    <input className="form-control" type="text" name="pages" /> 
+                                    <input className="form-control" type="text" name="pages" required/> 
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="authorID">Author ID:</label>
-                                    <input className="form-control" type="text" name="authorID" /> 
+                                    <input className="form-control" type="text" name="authorID" required/> 
                                 </div>
                             </div>
                         }
@@ -102,15 +103,15 @@ const CreateForm = () => {
                             <div>
                                 <div className="form-group">
                                     <label htmlFor="authorID">Author ID:</label>
-                                    <input className="form-control" type="text" name="authorID" /> 
+                                    <input className="form-control" type="text" name="authorID" required/> 
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="first">First Name:</label>
-                                    <input className="form-control" type="text" name="first" /> 
+                                    <input className="form-control" type="text" name="first" required/> 
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="last">Last Name:</label>
-                                    <input className="form-control" type="text" name="last" /> 
+                                    <input className="form-control" type="text" name="last" required/> 
                                 </div>
                             </div>
                         }
@@ -122,7 +123,12 @@ const CreateForm = () => {
                 {selected === 'Author' && 
                     <div>
                         {authorLoading && <p>Loading...</p>}
-                        {authorError && <pre className="text-danger">{authorError.toString()}</pre>}
+                        {authorError && 
+                            <ErrorPage 
+                                statusCode={authorError.toString().includes('Failed') ? 500 : 400} 
+                                message={authorError.toString()} 
+                            />
+                        }
                         {authorData && <div>
                             <p className="text-success">Author created!</p>
                             <Author 
@@ -136,7 +142,12 @@ const CreateForm = () => {
                 {selected === 'Book' && 
                     <div>
                         {bookLoading && <p>Loading...</p>}
-                        {bookError && <pre>{bookError.toString()}</pre>}
+                        {bookError && 
+                            <ErrorPage 
+                                statusCode={bookError.toString().includes('Failed') ? 500 : 400} 
+                                message={bookError.toString()} 
+                            />
+                        }
                         {bookData && <div>
                             <p className="text-success">Book created!</p>
                             <Book 

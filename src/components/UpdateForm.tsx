@@ -78,15 +78,15 @@ const UpdateForm = () => {
                     <form onSubmit={handleAuthorUpdate}>
                         <div className="form-group">
                             <label htmlFor="authorID">Author ID: </label>
-                            <input type="text" name="authorID" className="form-control" defaultValue={data.authorid} />
+                            <input type="text" name="authorID" className="form-control" defaultValue={data.authorid} required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="first">First name: </label>
-                            <input type="text" name="first" className="form-control" defaultValue={data.firstname} />
+                            <input type="text" name="first" className="form-control" defaultValue={data.firstname} required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="last">Last name: </label>
-                            <input type="text" name="last" className="form-control" defaultValue={data.lastname} />
+                            <input type="text" name="last" className="form-control" defaultValue={data.lastname} required/>
                         </div>
                         <input type="submit" className="btn btn-dark mt-3" value="Update" />
                     </form>
@@ -95,19 +95,19 @@ const UpdateForm = () => {
                     <form onSubmit={handleBookUpdate}>
                         <div className="form-group">
                             <label htmlFor="bookID">Book ID: </label>
-                            <input type="text" name="bookID" className="form-control" defaultValue={data.bookid} />
+                            <input type="text" name="bookID" className="form-control" defaultValue={data.bookid} required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="name">Name: </label>
-                            <input type="text" name="name" className="form-control" defaultValue={data.name} />
+                            <input type="text" name="name" className="form-control" defaultValue={data.name} required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="pages">Page Count: </label>
-                            <input type="text" name="pages" className="form-control" defaultValue={data.pageCount} />
+                            <input type="text" name="pages" className="form-control" defaultValue={data.pageCount} required/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="authorID">Author ID: </label>
-                            <input type="text" name="authorID" className="form-control" defaultValue={data.authorid} />
+                            <input type="text" name="authorID" className="form-control" defaultValue={data.authorid} required/>
                         </div>
                         <input type="submit" className="btn btn-dark mt-3" value="Update" />
                     </form>
@@ -115,7 +115,12 @@ const UpdateForm = () => {
             </div>
             <div className="row mt-3">
                 {authorLoading && <p>Loading...</p>}
-                {authorError && <pre>{authorError.toString()}</pre>}
+                {authorError && 
+                    <ErrorPage 
+                        statusCode={authorError.toString().includes('Failed') ? 500 : 400} 
+                        message={authorError.toString()} 
+                    />
+                }
                 {authorData && <div>
                     <p className="text-success fs-3">Author Updated</p>
                     <Author 
@@ -127,7 +132,12 @@ const UpdateForm = () => {
             </div>
             <div className="row mt-3">
                 {bookLoading && <p>Loading...</p>}
-                {bookError && <pre>{bookError.toString()}</pre>}
+                {bookError && 
+                    <ErrorPage 
+                        statusCode={bookError.toString().includes('Failed') ? 500 : 400} 
+                        message={bookError.toString()} 
+                    />
+                }
                 {bookData && <div>
                     <p className="text-success fs-3">Book Updated</p>
                     <Book 
