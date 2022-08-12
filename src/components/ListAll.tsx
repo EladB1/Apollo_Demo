@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Author from './Author';
 import Book from './Book';
+import ErrorPage from './ErrorPage';
 
 const getAllAuthors = gql`
     query {
@@ -60,7 +61,9 @@ const ListAll = () => {
             </div>
             {selected === 'Books' && <div className="row mt-5 text-wrap word-break">
                 {bookLoading && <p>Loading...</p>}
-                {bookError && <p>{bookError.toString()}</p>}
+                {bookError && 
+                    <ErrorPage statusCode={500} message={bookError.toString()}/>
+                }
                 {bookData && 
                     <div>{
                         bookData.allBooks.map((data: any) => {
@@ -81,7 +84,9 @@ const ListAll = () => {
             </div>}
             {selected === 'Authors' && <div className="row mt-5 text-wrap word-break">
                 {authorLoading && <p>Loading...</p>}
-                {authorError && <p>{authorError.toString()}</p>}
+                {authorError && 
+                    <ErrorPage statusCode={500} message={authorError.toString()}/>
+                }
                 {authorData && 
                     <div>{ 
                         authorData.allAuthors.map((data: any) => {

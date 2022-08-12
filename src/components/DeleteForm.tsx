@@ -2,6 +2,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useMutation, gql } from '@apollo/client';
 import { useState } from 'react';
 
+import ErrorPage from './ErrorPage';
+
 const deleteBook = gql`
     mutation DeleteBookById($id: ID!) {
         deleteBook(id: $id) {
@@ -54,7 +56,9 @@ const DeleteForm = () => {
             }
             <div className="row">
                 {bookLoading && <p>Loading...</p>}
-                {bookError && <pre>{bookError.toString()}</pre>}
+                {bookError && 
+                    <ErrorPage statusCode={500} message={bookError.toString()}/>
+                }
                 {bookData && 
                     <div>
                         <p className="display-4">Deleted Book</p>
@@ -65,7 +69,9 @@ const DeleteForm = () => {
             </div>
             <div className="row">
                 {authorLoading && <p>Loading...</p>}
-                {authorError && <pre>{authorError.toString()}</pre>}
+                {authorError && 
+                    <ErrorPage statusCode={500} message={authorError.toString()}/>
+                }
                 {authorData && 
                     <div>
                         <p className="display-4">Deleted Author</p>
