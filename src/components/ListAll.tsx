@@ -64,7 +64,7 @@ const ListAll = () => {
                 {bookData && 
                     <div>{
                         bookData.allBooks.map((data: any) => {
-                            return <div className="mb-1">
+                            return <div className="mb-1" key={`container-${data.id}`}>
                                 <Book 
                                     key={data.id}
                                     bookID={data.id}
@@ -85,7 +85,7 @@ const ListAll = () => {
                 {authorData && 
                     <div>{ 
                         authorData.allAuthors.map((data: any) => {
-                            return <div className="mb-1">
+                            return <div className="mb-1" key={`container-${data.id}`}>
                                 <Author 
                                 key={data.id} 
                                 authorID={data.id} 
