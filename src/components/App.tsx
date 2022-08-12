@@ -9,6 +9,7 @@ import ListAll from './ListAll';
 import CreateForm from './CreateForm';
 import UpdateForm from './UpdateForm';
 import DeleteForm from './DeleteForm';
+import ErrorPage from './ErrorPage';
 
 const App = () => {
     return (
@@ -21,6 +22,12 @@ const App = () => {
                 <Route path="/create" element={<CreateForm />} />
                 <Route path="/update/" element={<UpdateForm />} />
                 <Route path="/delete/:entity/:id" element={<DeleteForm />} />
+                <Route path="/*" element={
+                    <ErrorPage 
+                        statusCode={404} 
+                        message={'The page or entity could not be found'} 
+                    />} 
+                />
             </Routes>
         </div>
     );

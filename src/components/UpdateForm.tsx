@@ -1,9 +1,9 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useMutation, gql } from '@apollo/client';
 
 import Author from './Author';
 import Book from './Book';
-
+import ErrorPage from './ErrorPage';
 
 const updateAuthor = gql`
     mutation UpdateAuthor($id: ID!, $firstname: String, $lastname: String) {
@@ -31,14 +31,16 @@ const updateBook = gql`
 `;
 
 const UpdateForm = () => {
-    const navigate = useNavigate();
     const location = useLocation();
     const data: any = location.state;
     const [runUpdateAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(updateAuthor);
     const [runUpdateBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(updateBook);
     
     if (data == null)
-        navigate('/'); // invalid route to here, go somewhere else
+        return <ErrorPage 
+            statusCode={500} 
+            message={'Could not find data; you may have imporperly routed here. Please contact an administrator'} 
+        />;
 
     const handleAuthorUpdate = (event: any) => {
         event.preventDefault();
