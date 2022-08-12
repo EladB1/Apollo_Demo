@@ -19,7 +19,7 @@ const App = () => {
                 <Route path="/search/author" element={<Find type="Author"/>}/>
                 <Route path="/search/book" element={<Find type="Book"/>}/>
                 <Route path="/create" element={<CreateForm />} />
-                <Route path="/update/:entity/:id" element={<UpdateForm />} />
+                <Route path="/update/" element={<UpdateForm />} />
                 <Route path="/delete/:entity/:id" element={<DeleteForm />} />
             </Routes>
         </div>
