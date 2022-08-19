@@ -96,6 +96,32 @@ describe('Test ListAll feature', () => {
         expect(screen.queryAllByText('Author')).toHaveLength(2);
     });
 
+    it('Handle Error', async() => {
+        // Should work the same for both Book and Author
+        const mock = [{
+            request: {
+                query: getAllBooks
+            },
+            error: new Error("Some error")
+        }];
+        render(
+            <MockedProvider mocks={mock}>
+                <ListAll />
+            </MockedProvider>
+        );
+        const options = screen.getAllByRole('option');
+        const dropdown = screen.getByRole('combobox');
+        const second: any = options[1];
+        userEvent.selectOptions(dropdown, second);
+        expect(second).toHaveTextContent('Books');
+        expect(second.selected).toBe(true);
+        await waitFor(() => expect(screen.queryByText('Loading...')).toBeNull());
+        expect(screen.queryAllByText('Book')).toHaveLength(0);
+        expect(screen.queryAllByText('Author')).toHaveLength(0);
+        expect(screen.getByText(500)).toBeInTheDocument();
+        expect(screen.getByText('Error: Some error')).toBeInTheDocument();
+    });
+
     it('Authors selected no data', async () => {
         const mock = [{
             request: {
