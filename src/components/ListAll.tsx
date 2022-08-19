@@ -5,7 +5,7 @@ import Author from './Author';
 import Book from './Book';
 import ErrorPage from './ErrorPage';
 
-const getAllAuthors = gql`
+export const getAllAuthors = gql`
     query {
         allAuthors {
             id,
@@ -15,7 +15,7 @@ const getAllAuthors = gql`
     }
 `;
 
-const getAllBooks = gql`
+export const getAllBooks = gql`
     query {
         allBooks {
             id,
