@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Author from './Author';
 import Book from './Book';
 
-const getAuthor = gql`
+export const getAuthor = gql`
     query AuthorByID($id: ID!) {
         authorById(id: $id) {
             id,
@@ -14,7 +14,7 @@ const getAuthor = gql`
     }
 `;
 
-const getBook = gql`
+export const getBook = gql`
     query BookByID($id: ID!) {
         bookById(id: $id) {
             id,
