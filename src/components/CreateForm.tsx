@@ -5,7 +5,7 @@ import Author from './Author';
 import Book from './Book';
 import ErrorPage from './ErrorPage';
 
-const createBook = gql`
+export const createBook = gql`
     mutation CreateBook($id: ID!, $name: String!, $pageCount: Int!, $authorID: ID!) {
         createBook(id: $id, name: $name, pageCount: $pageCount, authorID: $authorID) {
             id,
@@ -20,7 +20,7 @@ const createBook = gql`
     }
 `;
 
-const createAuthor = gql`
+export const createAuthor = gql`
     mutation CreateAuthor($id: ID!, $firstname: String!, $lastname: String!) {
         createAuthor(id: $id, firstName: $firstname, lastName: $lastname) {
             id,
@@ -32,8 +32,8 @@ const createAuthor = gql`
 
 const CreateForm = () => {
     const [selected, setSelected] = useState<string>('');
-    const [runCreateBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(createBook);
-    const [runCreateAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(createAuthor);
+    const [runCreateBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(createBook, {errorPolicy: 'all'});
+    const [runCreateAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(createAuthor, {errorPolicy: 'all'});
     
     const formSubmit = (event: any) => {
         event.preventDefault();
