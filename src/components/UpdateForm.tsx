@@ -5,7 +5,7 @@ import Author from './Author';
 import Book from './Book';
 import ErrorPage from './ErrorPage';
 
-const updateAuthor = gql`
+export const updateAuthor = gql`
     mutation UpdateAuthor($id: ID!, $firstname: String, $lastname: String) {
         updateAuthor(id: $id, firstName: $firstname, lastName: $lastname) {
             id,
@@ -15,7 +15,7 @@ const updateAuthor = gql`
     }
 `;
 
-const updateBook = gql`
+export const updateBook = gql`
     mutation UpdateBook($id: ID!, $name: String, $pageCount: Int, $authorID: ID) {
         updateBook(id: $id, name: $name, pageCount: $pageCount, authorID: $authorID) {
             id,
@@ -33,8 +33,8 @@ const updateBook = gql`
 const UpdateForm = () => {
     const location = useLocation();
     const data: any = location.state;
-    const [runUpdateAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(updateAuthor);
-    const [runUpdateBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(updateBook);
+    const [runUpdateAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(updateAuthor, {errorPolicy: 'all'});
+    const [runUpdateBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(updateBook, {errorPolicy: 'all'});
     
     if (data == null)
         return <ErrorPage 
@@ -70,7 +70,7 @@ const UpdateForm = () => {
     return (
         <div className="container">
             <div className="row">
-                <h3 className="display-3 text-center">Update</h3>
+                <h3 className="display-3 text-center">Update {data.type}</h3>
                 <hr />
             </div>
             <div className="row">
