@@ -53,6 +53,8 @@ describe('Update Form', () => {
             expect(button).toHaveValue('Update');
         });
 
+        /*
+        // commenting out since field can no longer be changed
         it('Update submit - invalid', async () => {
             const errorMsg = 'Could not find author with ID \'author-51\'';
             const mock: any = [{
@@ -88,6 +90,7 @@ describe('Update Form', () => {
             expect(screen.getByText('400')).toBeInTheDocument();
             expect(screen.getByText(`Error: ${errorMsg}`)).toBeInTheDocument();
         });
+        */
 
         it('Update submit - API Error', async () => {
             // Would be the same for book so no need to test there
@@ -188,6 +191,8 @@ describe('Update Form', () => {
             expect(button).toHaveValue('Update');
         });
 
+        /*
+        // commenting out since field can no longer be changed
         it('Update submit - invalid book ID', async () => {
             const errorMsg = 'Could not find book with ID \'book-51\'';
             const mock: any = [{
@@ -225,6 +230,7 @@ describe('Update Form', () => {
             expect(screen.getByText('400')).toBeInTheDocument();
             expect(screen.getByText(`Error: ${errorMsg}`)).toBeInTheDocument();
         });
+        */
 
         it('Update submit - invalid author ID', async () => {
             const errorMsg = 'Could not find author with ID \'author-51\'';

@@ -78,7 +78,7 @@ const UpdateForm = () => {
                     <form onSubmit={handleAuthorUpdate}>
                         <div className="form-group">
                             <label htmlFor="authorID">Author ID: </label>
-                            <input type="text" name="authorID" className="form-control" defaultValue={data.authorid} required/>
+                            <input type="text" name="authorID" className="form-control" defaultValue={data.authorid} disabled/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="first">First name: </label>
@@ -95,7 +95,7 @@ const UpdateForm = () => {
                     <form onSubmit={handleBookUpdate}>
                         <div className="form-group">
                             <label htmlFor="bookID">Book ID: </label>
-                            <input type="text" name="bookID" className="form-control" defaultValue={data.bookid} required/>
+                            <input type="text" name="bookID" className="form-control" defaultValue={data.bookid} disabled/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="name">Name: </label>
