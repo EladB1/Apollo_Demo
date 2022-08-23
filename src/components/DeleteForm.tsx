@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import ErrorPage from './ErrorPage';
 
-const deleteBook = gql`
+export const deleteBook = gql`
     mutation DeleteBookById($id: ID!) {
         deleteBook(id: $id) {
             id,
@@ -13,7 +13,7 @@ const deleteBook = gql`
     }
 `;
 
-const deleteAuthor = gql`
+export const deleteAuthor = gql`
     mutation DeleteAuthorById($id: ID!) {
         deleteAuthor(id: $id) {
             id,
@@ -27,8 +27,8 @@ const DeleteForm = () => {
     const { entity, id } = useParams();
     const [ clickedYes, setClickedYes ] = useState(false);
     const navigate = useNavigate();
-    const [runDeleteBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(deleteBook);
-    const [runDeleteAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(deleteAuthor);
+    const [runDeleteBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(deleteBook, {errorPolicy: 'all'});
+    const [runDeleteAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(deleteAuthor, {errorPolicy: 'all'});
 
     const deleteEntity = (event: any) => {
         setClickedYes(true);
@@ -57,7 +57,7 @@ const DeleteForm = () => {
             <div className="row">
                 {bookLoading && <p>Loading...</p>}
                 {bookError && 
-                    <ErrorPage statusCode={500} message={bookError.toString()}/>
+                    <ErrorPage statusCode={bookError.toString().includes('Failed') ? 500: 400} message={bookError.toString()}/>
                 }
                 {bookData && 
                     <div>
@@ -70,7 +70,7 @@ const DeleteForm = () => {
             <div className="row">
                 {authorLoading && <p>Loading...</p>}
                 {authorError && 
-                    <ErrorPage statusCode={500} message={authorError.toString()}/>
+                    <ErrorPage statusCode={authorError.toString().includes('Failed') ? 500 : 400} message={authorError.toString()}/>
                 }
                 {authorData && 
                     <div>
