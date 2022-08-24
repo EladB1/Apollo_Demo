@@ -3,6 +3,7 @@ import { useMutation, gql } from '@apollo/client';
 import { useState } from 'react';
 
 import ErrorPage from './ErrorPage';
+import { getAllBooks, getAllAuthors } from './ListAll';
 
 export const deleteBook = gql`
     mutation DeleteBookById($id: ID!) {
@@ -27,8 +28,14 @@ const DeleteForm = () => {
     const { entity, id } = useParams();
     const [ clickedYes, setClickedYes ] = useState(false);
     const navigate = useNavigate();
-    const [runDeleteBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(deleteBook, {errorPolicy: 'all'});
-    const [runDeleteAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(deleteAuthor, {errorPolicy: 'all'});
+    const [runDeleteBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(deleteBook, {
+        errorPolicy: 'all', 
+        refetchQueries: [{query: getAllBooks}, 'allBooks']
+    });
+    const [runDeleteAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(deleteAuthor, {
+        errorPolicy: 'all', 
+        refetchQueries: [{query: getAllAuthors}, 'allAuthors']
+    });
 
     const deleteEntity = (event: any) => {
         setClickedYes(true);

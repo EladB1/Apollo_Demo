@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Author from './Author';
 import Book from './Book';
 import ErrorPage from './ErrorPage';
+import { getAllBooks, getAllAuthors } from './ListAll';
 
 export const createBook = gql`
     mutation CreateBook($id: ID!, $name: String!, $pageCount: Int!, $authorID: ID!) {
@@ -32,8 +33,14 @@ export const createAuthor = gql`
 
 const CreateForm = () => {
     const [selected, setSelected] = useState<string>('');
-    const [runCreateBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(createBook, {errorPolicy: 'all'});
-    const [runCreateAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(createAuthor, {errorPolicy: 'all'});
+    const [runCreateBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(createBook, {
+        errorPolicy: 'all', 
+        refetchQueries: [{query: getAllBooks}, 'allBooks']
+    });
+    const [runCreateAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(createAuthor, {
+        errorPolicy: 'all', 
+        refetchQueries: [{query: getAllAuthors}, 'allAuthors']
+    });
     
     const formSubmit = (event: any) => {
         event.preventDefault();
