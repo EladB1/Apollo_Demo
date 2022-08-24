@@ -30,11 +30,11 @@ const DeleteForm = () => {
     const navigate = useNavigate();
     const [runDeleteBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(deleteBook, {
         errorPolicy: 'all', 
-        refetchQueries: [{query: getAllBooks}, 'allBooks']
+        refetchQueries: [{query: getAllBooks}]
     });
     const [runDeleteAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(deleteAuthor, {
         errorPolicy: 'all', 
-        refetchQueries: [{query: getAllAuthors}, 'allAuthors']
+        refetchQueries: [{query: getAllAuthors}, {query: getAllBooks}] // deleting an author will delete the author's books
     });
 
     const deleteEntity = (event: any) => {

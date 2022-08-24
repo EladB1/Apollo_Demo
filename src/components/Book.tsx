@@ -10,7 +10,6 @@ const Book = (props: BookProps) => {
 
     const extractDetailsAndRoute = (event: any) => {
         const children = event.target.parentNode.nextSibling.children;
-        console.log(children);
         const [id, name, pageCount, authorID] = [...children].map((child: HTMLElement) => {
             return child.innerText.split(': ')[1]; // remove the labels
         });

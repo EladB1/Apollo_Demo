@@ -35,11 +35,11 @@ const CreateForm = () => {
     const [selected, setSelected] = useState<string>('');
     const [runCreateBook, {loading: bookLoading, error: bookError, data: bookData}] = useMutation(createBook, {
         errorPolicy: 'all', 
-        refetchQueries: [{query: getAllBooks}, 'allBooks']
+        refetchQueries: [{query: getAllBooks}]
     });
     const [runCreateAuthor, {loading: authorLoading, error: authorError, data: authorData}] = useMutation(createAuthor, {
         errorPolicy: 'all', 
-        refetchQueries: [{query: getAllAuthors}, 'allAuthors']
+        refetchQueries: [{query: getAllAuthors}]
     });
     
     const formSubmit = (event: any) => {
